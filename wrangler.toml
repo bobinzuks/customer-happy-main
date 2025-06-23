@@ -1,27 +1,17 @@
 name = "gsurveyai"
 main = "src/server.ts"
 compatibility_date = "2024-06-23"
-node_compat = true
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 ENVIRONMENT = "production"
 
 [[kv_namespaces]]
 binding = "CACHE"
-id = "your-kv-namespace-id"
-preview_id = "your-preview-kv-namespace-id"
+id = "08cc84d43a784ca8a39e349e99c4702f"
+preview_id = "0a3d4a11fb2f428586ad3731368762bf"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "customer-happy-db"
-database_id = "your-d1-database-id"
-
-[build]
-command = "npm run build"
-upload_dir = "./dist"
-
-# Custom domain configuration (add after purchasing domain)
-routes = [
-  { pattern = "gsurveyai.com/*", custom_domain = true },
-  { pattern = "www.gsurveyai.com/*", custom_domain = true }
-]
+database_name = "gsurveyai-db"
+database_id = "3282e071-24de-4c39-944f-23b25fd75cda"

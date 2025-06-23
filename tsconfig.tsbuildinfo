@@ -1,0 +1,1 @@
+{"root":["./src/server.ts","./src/api/auth.ts","./src/api/dashboard.ts","./src/api/interview.ts","./src/config/database.ts","./src/services/aiInterviewEngine.ts","./src/services/complianceManager.ts","./src/services/subscriptionManager.ts","./src/types/index.ts"],"errors":true,"version":"5.8.3"}
