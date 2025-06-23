@@ -1,7 +1,7 @@
 {
-  "name": "customer-happy",
+  "name": "gsurveyai",
   "version": "1.0.0",
-  "description": "AI-powered customer interview and review management SaaS platform",
+  "description": "AI-Powered Customer Survey & Review Platform",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
@@ -18,8 +18,9 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "docker:build": "docker build -t customer-happy .",
-    "docker:run": "docker run -p 3000:3000 customer-happy"
+    "docker:build": "docker build -t gsurveyai .",
+    "docker:run": "docker run -p 3000:3000 gsurveyai",
+    "deploy": "./cloudflare-deploy.sh"
   },
   "keywords": [
     "saas",
@@ -30,7 +31,7 @@
     "sentiment-analysis",
     "business-analytics"
   ],
-  "author": "CustomerHappy Team",
+  "author": "GSurveyAI Team",
   "license": "MIT",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
