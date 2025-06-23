@@ -48,7 +48,25 @@ async function buildServer(): Promise<FastifyInstance> {
 
   // CORS
   await fastify.register(fastifyCors, {
-    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.FRONTEND_URL,
+    origin: (origin, cb) => {
+      const allowedOrigins = [
+        'https://gsurveyai.pages.dev',
+        'https://gsurveyai.com',
+        'https://www.gsurveyai.com',
+        'http://localhost:3000',
+        'http://localhost:8788'
+      ];
+      // Also allow FRONTEND_URL if set
+      if (process.env.FRONTEND_URL) {
+        allowedOrigins.push(process.env.FRONTEND_URL);
+      }
+      // Allow requests with no origin (like Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        cb(null, true);
+      } else {
+        cb(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 
