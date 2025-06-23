@@ -55,7 +55,7 @@ class CustomerInterviewApp {
             const deviceType = this.detectDeviceType();
             const languageCode = navigator.language.split('-')[0] || 'en';
             
-            const response = await fetch('/api/interview/start', {
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/interview/start`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ class CustomerInterviewApp {
             const typingMessage = this.addTypingIndicator();
 
             // Send message to API
-            const response = await fetch(`/api/interview/${this.sessionId}/message`, {
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/interview/${this.sessionId}/message`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -342,7 +342,7 @@ class CustomerInterviewApp {
 
     async completeInterview() {
         try {
-            const response = await fetch(`/api/interview/${this.sessionId}/complete`, {
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/interview/${this.sessionId}/complete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -405,7 +405,7 @@ class CustomerInterviewApp {
 
     async trackReviewAction(action) {
         try {
-            await fetch(`/api/interview/${this.sessionId}/action`, {
+            await fetch(`${window.APP_CONFIG.API_URL}/api/interview/${this.sessionId}/action`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

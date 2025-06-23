@@ -158,19 +158,19 @@ class DashboardManager {
     }
 
     async fetchKPIData(params) {
-        const response = await fetch(`/api/dashboard/kpis?${params}`);
+        const response = await fetch(`${window.APP_CONFIG.API_URL}/api/dashboard/kpis?${params}`);
         if (!response.ok) throw new Error(`KPI fetch failed: ${response.status}`);
         return response.json();
     }
 
     async fetchChartData(params) {
-        const response = await fetch(`/api/dashboard/charts?${params}`);
+        const response = await fetch(`${window.APP_CONFIG.API_URL}/api/dashboard/charts?${params}`);
         if (!response.ok) throw new Error(`Chart data fetch failed: ${response.status}`);
         return response.json();
     }
 
     async fetchActivityData(params) {
-        const response = await fetch(`/api/dashboard/activity?${params}`);
+        const response = await fetch(`${window.APP_CONFIG.API_URL}/api/dashboard/activity?${params}`);
         if (!response.ok) throw new Error(`Activity fetch failed: ${response.status}`);
         return response.json();
     }
@@ -598,7 +598,7 @@ class DashboardManager {
                 format: 'csv'
             });
             
-            const response = await fetch(`/api/dashboard/export?${params}`);
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/dashboard/export?${params}`);
             if (!response.ok) throw new Error('Export failed');
             
             const blob = await response.blob();
