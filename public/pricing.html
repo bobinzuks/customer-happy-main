@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transparent pricing for AI-powered customer interview platform">
+    
+    <title>Pricing - CustomerHappy</title>
+    
+    <link rel="stylesheet" href="/css/pricing.css">
+    <link rel="preload" href="/js/pricing.js" as="script">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span>CustomerHappy</span>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/">Features</a>
+                    <a href="/pricing" class="active">Pricing</a>
+                    <a href="/demo">Demo</a>
+                    <a href="/docs">Docs</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <a href="/login" class="btn-ghost">Login</a>
+                    <a href="/signup" class="btn-primary">Start Free Trial</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pricing-main">
+        <!-- Hero Section -->
+        <section class="pricing-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Simple, Transparent Pricing</h1>
+                    <p class="hero-subtitle">Choose the plan that fits your business needs. All plans include our core AI interview features.</p>
+                    
+                    <!-- Billing Toggle -->
+                    <div class="billing-toggle">
+                        <span class="toggle-label">Monthly</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="annual-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">
+                            Annual <span class="discount-badge">Save 20%</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Cards -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="pricing-grid">
+                    <!-- Starter Plan -->
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <h3 class="plan-name">Starter</h3>
+                            <p class="plan-description">Perfect for small businesses getting started</p>
+                        </div>
+                        
+                        <div class="card-pricing">
+                            <div class="price-display">
+                                <span class="currency">$</span>
+                                <span class="amount" data-monthly="49" data-annual="39">49</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="billing-info monthly-info">Billed monthly</p>
+                            <p class="billing-info annual-info" style="display: none;">Billed annually ($468/year)</p>
+                        </div>
+                        
+                        <div class="card-features">
+                            <ul class="features-list">
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>1 Business Location</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>500 Interviews/month</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Standard AI Response (&lt;1s)</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>English + 1 Language</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Google Review Integration</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Basic Analytics</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Email Support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-action">
+                            <button class="btn-card btn-outline" onclick="selectPlan('starter')">
+                                Start 14-Day Free Trial
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Professional Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        
+                        <div class="card-header">
+                            <h3 class="plan-name">Professional</h3>
+                            <p class="plan-description">For growing businesses with advanced needs</p>
+                        </div>
+                        
+                        <div class="card-pricing">
+                            <div class="price-display">
+                                <span class="currency">$</span>
+                                <span class="amount" data-monthly="149" data-annual="119">149</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="billing-info monthly-info">Billed monthly</p>
+                            <p class="billing-info annual-info" style="display: none;">Billed annually ($1,428/year)</p>
+                        </div>
+                        
+                        <div class="card-features">
+                            <ul class="features-list">
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>3 Business Locations</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>2,000 Interviews/month</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Fast AI Response (&lt;500ms)</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>5 Languages Supported</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Advanced Analytics & Reports</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>API Access</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Priority Support</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>CRM Integrations</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-action">
+                            <button class="btn-card btn-primary" onclick="selectPlan('professional')">
+                                Start 14-Day Free Trial
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <h3 class="plan-name">Enterprise</h3>
+                            <p class="plan-description">For large organizations with unlimited scaling</p>
+                        </div>
+                        
+                        <div class="card-pricing">
+                            <div class="price-display">
+                                <span class="currency">$</span>
+                                <span class="amount" data-monthly="399" data-annual="319">399</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="billing-info monthly-info">Billed monthly</p>
+                            <p class="billing-info annual-info" style="display: none;">Billed annually ($3,828/year)</p>
+                        </div>
+                        
+                        <div class="card-features">
+                            <ul class="features-list">
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Unlimited Locations</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Unlimited Interviews</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Ultra-Fast AI (&lt;300ms)</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>25+ Languages</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>White-Label Solution</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Full API Access</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Dedicated Success Manager</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Custom Integrations</span>
+                                </li>
+                                <li class="feature-item">
+                                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>24/7 Phone Support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-action">
+                            <button class="btn-card btn-outline" onclick="selectPlan('enterprise')">
+                                Contact Sales
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3 class="faq-question">How does the free trial work?</h3>
+                        <p class="faq-answer">All plans include a 14-day free trial with full access to features. No credit card required to start. You can cancel anytime during the trial period.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">What happens if I exceed my interview limit?</h3>
+                        <p class="faq-answer">We'll notify you when you're approaching your limit. You can upgrade your plan or purchase additional interviews as needed. We never cut off service mid-month.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is this Google compliant?</h3>
+                        <p class="faq-answer">Yes! Our platform is built with Google and FTC compliance in mind. We ensure equal opportunity review requests and maintain full audit trails for compliance reporting.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I change plans anytime?</h3>
+                        <p class="faq-answer">Absolutely. You can upgrade or downgrade your plan at any time. Changes are prorated and take effect immediately.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">What languages are supported?</h3>
+                        <p class="faq-answer">We support 25+ languages including English, Spanish, French, German, Italian, Portuguese, Japanese, Korean, Chinese, and more. Language availability depends on your plan.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Do you offer custom enterprise solutions?</h3>
+                        <p class="faq-answer">Yes! Enterprise customers can access white-label solutions, custom integrations, dedicated infrastructure, and specialized support. Contact our sales team for details.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to transform your customer experience?</h2>
+                    <p>Join thousands of businesses using AI-powered interviews to improve customer satisfaction and gather authentic reviews.</p>
+                    
+                    <div class="cta-actions">
+                        <button class="btn-primary-large" onclick="selectPlan('professional')">
+                            Start Free Trial
+                        </button>
+                        <a href="/demo" class="btn-ghost-large">
+                            Watch Demo
+                        </a>
+                    </div>
+                    
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <span class="trust-icon">🔒</span>
+                            <span>SOC 2 Compliant</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">🛡️</span>
+                            <span>GDPR Ready</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">⚡</span>
+                            <span>99.9% Uptime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span>CustomerHappy</span>
+                    </div>
+                    <p>AI-powered customer interviews that drive authentic reviews and business growth.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="/features">Features</a>
+                        <a href="/pricing">Pricing</a>
+                        <a href="/integrations">Integrations</a>
+                        <a href="/api">API</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="/about">About</a>
+                        <a href="/careers">Careers</a>
+                        <a href="/press">Press</a>
+                        <a href="/contact">Contact</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="/docs">Documentation</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/support">Support</a>
+                        <a href="/compliance">Compliance</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 CustomerHappy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/security">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/pricing.js"></script>
+</body>
+</html>

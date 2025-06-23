@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="AI-powered customer experience interview platform">
+    <meta name="theme-color" content="#007AFF">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Customer Interview">
+    <link rel="apple-touch-icon" href="/assets/icon-192.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/css/critical.css" as="style">
+    <link rel="preload" href="/js/app.js" as="script">
+    
+    <title>Customer Experience Interview</title>
+    <link rel="stylesheet" href="/css/critical.css">
+    <style>
+        /* Critical CSS inlined for fastest loading */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .app-container {
+            display: none;
+            height: 100vh;
+            flex-direction: column;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        .app-header {
+            padding: 20px 20px 15px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .business-info {
+            text-align: center;
+        }
+        
+        .business-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin: 0 auto 10px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .business-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 4px;
+        }
+        
+        .interview-subtitle {
+            font-size: 14px;
+            color: #8e8e93;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <h2>Starting your interview...</h2>
+        <p>Please wait while we prepare everything</p>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container" class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="business-info">
+                <div id="business-logo" class="business-logo">🏪</div>
+                <h1 id="business-name" class="business-name">Loading...</h1>
+                <p class="interview-subtitle">Customer Experience Interview</p>
+            </div>
+        </header>
+
+        <!-- Chat Interface -->
+        <main class="chat-container" role="main" aria-labelledby="business-name">
+            <div id="conversation-flow" class="conversation-flow" role="log" aria-live="polite">
+                <!-- Messages will be dynamically inserted here -->
+            </div>
+            
+            <!-- Input Area -->
+            <div class="input-area">
+                <button id="voice-button" class="voice-button" aria-label="Voice input" type="button">
+                    <svg class="mic-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                </button>
+                
+                <div class="input-wrapper">
+                    <textarea 
+                        id="message-input" 
+                        class="message-input" 
+                        placeholder="Tell us about your experience..."
+                        rows="1"
+                        aria-label="Type your response"
+                    ></textarea>
+                    <button id="send-button" class="send-button" aria-label="Send message" type="button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Review Options Screen (Initially Hidden) -->
+        <div id="review-screen" class="review-screen" style="display: none;">
+            <div class="review-header">
+                <h2>Share Your Experience</h2>
+                <p id="review-subtitle">Help others learn about your experience</p>
+            </div>
+            
+            <div class="review-options">
+                <button id="google-review-btn" class="review-option public-review">
+                    <div class="option-icon">🌟</div>
+                    <div class="option-content">
+                        <h3>Share Publicly</h3>
+                        <p>Write a Google review to help other customers</p>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </button>
+                
+                <button id="private-feedback-btn" class="review-option private-feedback">
+                    <div class="option-icon">💬</div>
+                    <div class="option-content">
+                        <h3>Private Feedback</h3>
+                        <p>Share feedback directly with the business</p>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </button>
+            </div>
+            
+            <div class="compliance-notice">
+                <p id="compliance-text">Your choice helps us improve. Both options are equally appreciated.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+    
+    <!-- Main App Script -->
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+// Prisma schema for AI-Powered Customer Interview SaaS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("owner")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  businesses Business[]
+  
+  @@map("users")
+}
+
+model Business {
+  id        String   @id @default(cuid())
+  name      String
+  industry  String
+  ownerId   String
+  settings  Json     @default("{}")
+  googlePlaceId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  owner        User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  locations    Location[]
+  interviews   Interview[]
+  customers    Customer[]
+  reviewRequests ReviewRequest[]
+  subscription Subscription?
+  
+  @@map("businesses")
+}
+
+model Location {
+  id           String  @id @default(cuid())
+  businessId   String
+  name         String
+  address      String
+  googlePlaceId String?
+  phone        String?
+  
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  @@map("locations")
+}
+
+model Customer {
+  id         String   @id @default(cuid())
+  email      String?
+  phone      String?
+  name       String?
+  businessId String
+  metadata   Json     @default("{}")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  interviews Interview[]
+  reviewRequests ReviewRequest[]
+  
+  @@map("customers")
+}
+
+model Interview {
+  id              String    @id @default(cuid())
+  sessionId       String    @unique
+  businessId      String
+  customerId      String?
+  startedAt       DateTime  @default(now())
+  completedAt     DateTime?
+  status          String    @default("active") // active, completed, abandoned
+  sentimentScore  Float?
+  finalAction     String?   // google_review, private_feedback, none
+  languageCode    String    @default("en")
+  deviceType      String    @default("mobile") // mobile, desktop, tablet
+  messageCount    Int       @default(0)
+  durationSeconds Int?
+  metadata        Json      @default("{}")
+  
+  business  Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  customer  Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  messages  ConversationMessage[]
+  reviewRequest ReviewRequest?
+  
+  @@index([businessId, startedAt])
+  @@map("interviews")
+}
+
+model ConversationMessage {
+  id             String   @id @default(cuid())
+  interviewId    String
+  sender         String   // user, ai
+  content        String
+  messageType    String   @default("text") // text, voice, button
+  sentimentScore Float?
+  responseTimeMs Int?
+  timestamp      DateTime @default(now())
+  metadata       Json     @default("{}")
+  
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  
+  @@index([interviewId, timestamp])
+  @@map("conversation_messages")
+}
+
+model ReviewRequest {
+  id                 String    @id @default(cuid())
+  businessId         String
+  customerId         String?
+  interviewId        String    @unique
+  type               String    // google_review, private_feedback
+  status             String    @default("sent") // sent, completed, declined
+  sentAt             DateTime  @default(now())
+  completedAt        DateTime?
+  complianceValidated Boolean  @default(true)
+  complianceNotes    String?
+  
+  business  Business   @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  customer  Customer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  interview Interview  @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  
+  @@map("review_requests")
+}
+
+model ComplianceRecord {
+  id                String   @id @default(cuid())
+  businessId        String
+  auditPeriodStart  DateTime
+  auditPeriodEnd    DateTime
+  totalRequests     Int
+  compliantRequests Int
+  violationsFound   Int
+  violationDetails  Json     @default("{}")
+  auditDate         DateTime @default(now())
+  
+  @@index([businessId, auditPeriodStart])
+  @@map("compliance_records")
+}
+
+model Subscription {
+  id                 String   @id @default(cuid())
+  businessId         String   @unique
+  planType           String   // starter, professional, enterprise
+  status             String   @default("active") // active, past_due, canceled
+  currentPeriodStart DateTime @default(now())
+  currentPeriodEnd   DateTime
+  monthlyPrice       Int      // in cents
+  features           Json     @default("{}")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  @@map("subscriptions")
+}
+
+model AnalyticsSummary {
+  id           String   @id @default(cuid())
+  businessId   String
+  period       String   // day, week, month
+  startDate    DateTime
+  endDate      DateTime
+  metrics      Json     @default("{}")
+  sentimentTrend Json   @default("[]")
+  createdAt    DateTime @default(now())
+  
+  @@unique([businessId, period, startDate])
+  @@index([businessId, startDate])
+  @@map("analytics_summaries")
+}

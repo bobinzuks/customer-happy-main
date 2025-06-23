@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Business dashboard for AI-powered customer interview analytics">
+    
+    <title>Business Dashboard - Customer Interview Analytics</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/css/dashboard.css" as="style">
+    <link rel="preload" href="/js/dashboard.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js" as="script">
+    
+    <link rel="stylesheet" href="/css/dashboard.css">
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span>CustomerHappy</span>
+                </div>
+                
+                <div class="business-selector">
+                    <select id="business-selector" aria-label="Select business location">
+                        <option value="all">All Locations (3)</option>
+                        <option value="loc-1">Downtown Store</option>
+                        <option value="loc-2">Mall Location</option>
+                        <option value="loc-3">Airport Branch</option>
+                    </select>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="#overview" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                        </svg>
+                        Overview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#interviews" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                        Interviews
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reviews" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/>
+                        </svg>
+                        Reviews
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#analytics" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                        Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#compliance" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                        </svg>
+                        Compliance
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Business Owner</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 id="page-title">Overview Dashboard</h1>
+                    <p id="page-subtitle">Real-time customer interview analytics</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="date-range-picker">
+                        <select id="date-range" aria-label="Select date range">
+                            <option value="today">Today</option>
+                            <option value="week" selected>Last 7 days</option>
+                            <option value="month">Last 30 days</option>
+                            <option value="quarter">Last 90 days</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn-primary" id="start-campaign-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        Start Campaign
+                    </button>
+                    
+                    <button class="btn-secondary" id="export-data-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- KPI Cards -->
+                <section class="kpi-section" aria-labelledby="kpi-title">
+                    <h2 id="kpi-title" class="sr-only">Key Performance Indicators</h2>
+                    
+                    <div class="kpi-grid">
+                        <div class="kpi-card positive-trend">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">⭐</div>
+                                <div class="kpi-trend">
+                                    <span class="trend-indicator positive">↗</span>
+                                    <span class="trend-value">+0.2</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="avg-rating">4.6</div>
+                            <div class="kpi-label">Average Rating</div>
+                            <div class="kpi-subtitle">this month</div>
+                        </div>
+                        
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">💬</div>
+                                <div class="kpi-trend">
+                                    <span class="trend-indicator positive">↗</span>
+                                    <span class="trend-value">+23%</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="total-interviews">247</div>
+                            <div class="kpi-label">Interviews Completed</div>
+                            <div class="kpi-subtitle">vs last month</div>
+                        </div>
+                        
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">🌟</div>
+                                <div class="kpi-trend">
+                                    <span class="trend-indicator neutral">→</span>
+                                    <span class="trend-value">Stable</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="review-rate">73%</div>
+                            <div class="kpi-label">Google Review Rate</div>
+                            <div class="kpi-subtitle">of completed interviews</div>
+                        </div>
+                        
+                        <div class="kpi-card warning">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">⚡</div>
+                                <div class="kpi-trend">
+                                    <span class="trend-indicator positive">↗</span>
+                                    <span class="trend-value">-12ms</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="response-time">0.4s</div>
+                            <div class="kpi-label">AI Response Time</div>
+                            <div class="kpi-subtitle">average</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="charts-section">
+                    <div class="charts-grid">
+                        <!-- Sentiment Trend Chart -->
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Sentiment Trend</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-filter active" data-period="7d">7D</button>
+                                    <button class="chart-filter" data-period="30d">30D</button>
+                                    <button class="chart-filter" data-period="90d">90D</button>
+                                </div>
+                            </div>
+                            <canvas id="sentiment-chart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <!-- Interview Volume Chart -->
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Interview Volume</h3>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color completed"></span>
+                                        <span>Completed</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color abandoned"></span>
+                                        <span>Abandoned</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas id="volume-chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Feed -->
+                <section class="activity-section">
+                    <div class="activity-panel">
+                        <div class="activity-header">
+                            <h3>Recent Activity</h3>
+                            <button class="refresh-btn" id="refresh-activity" aria-label="Refresh activity feed">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="activity-feed" id="activity-feed">
+                            <div class="activity-item positive">
+                                <div class="activity-icon">⭐</div>
+                                <div class="activity-content">
+                                    <p><strong>5-star review</strong> from Sarah M.</p>
+                                    <p class="activity-time">2 minutes ago</p>
+                                    <div class="activity-preview">"Excellent service and very friendly staff!"</div>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="activity-action" aria-label="View full review">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item interview">
+                                <div class="activity-icon">💬</div>
+                                <div class="activity-content">
+                                    <p><strong>Interview completed</strong> - Positive sentiment</p>
+                                    <p class="activity-time">12 minutes ago</p>
+                                    <div class="activity-preview">Customer chose Google review option</div>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="activity-action" aria-label="View interview">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item negative">
+                                <div class="activity-icon">😞</div>
+                                <div class="activity-content">
+                                    <p><strong>Negative feedback</strong> from Mike R.</p>
+                                    <p class="activity-time">25 minutes ago</p>
+                                    <div class="activity-preview">Long wait time mentioned - escalated to support</div>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="activity-action urgent" aria-label="Handle feedback">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M13,17H11V15H13V17M13,13H11V7H13V13Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item campaign">
+                                <div class="activity-icon">📢</div>
+                                <div class="activity-content">
+                                    <p><strong>Campaign launched</strong> - "Summer Satisfaction Survey"</p>
+                                    <p class="activity-time">1 hour ago</p>
+                                    <div class="activity-preview">Target: 100 interviews over 7 days</div>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="activity-action" aria-label="View campaign">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-card" id="send-invites">
+                            <div class="action-icon">📧</div>
+                            <div class="action-content">
+                                <h4>Send Interview Invites</h4>
+                                <p>Bulk send to customer list</p>
+                            </div>
+                        </button>
+                        
+                        <button class="action-card" id="view-reports">
+                            <div class="action-icon">📊</div>
+                            <div class="action-content">
+                                <h4>Generate Report</h4>
+                                <p>Detailed analytics export</p>
+                            </div>
+                        </button>
+                        
+                        <button class="action-card" id="manage-templates">
+                            <div class="action-icon">✏️</div>
+                            <div class="action-content">
+                                <h4>Edit Templates</h4>
+                                <p>Customize interview flow</p>
+                            </div>
+                        </button>
+                        
+                        <button class="action-card" id="compliance-check">
+                            <div class="action-icon">🛡️</div>
+                            <div class="action-content">
+                                <h4>Compliance Check</h4>
+                                <p>Review recent audits</p>
+                            </div>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Loading dashboard data...</p>
+    </div>
+
+    <!-- WebSocket connection status -->
+    <div id="connection-status" class="connection-status">
+        <div class="status-indicator connected">
+            <span class="status-dot"></span>
+            <span class="status-text">Real-time updates active</span>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
