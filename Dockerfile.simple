@@ -1,0 +1,18 @@
+# Simple Dockerfile for Railway
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json ./
+COPY server-simple.js ./
+COPY public ./public
+
+# Install only production dependencies
+RUN npm install --only=production
+
+# Expose port
+EXPOSE 3000
+
+# Start the simple server
+CMD ["node", "server-simple.js"]
