@@ -4,8 +4,8 @@
   "description": "AI-Powered Customer Survey & Review Platform",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "build": "npm run db:generate && tsc --skipLibCheck",
+    "start": "npm run db:generate && node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "jest",
     "test:watch": "jest --watch",
