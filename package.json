@@ -2,10 +2,10 @@
   "name": "gsurveyai",
   "version": "1.0.0",
   "description": "AI-Powered Customer Survey & Review Platform",
-  "main": "dist/server.js",
+  "main": "server-simple.js",
   "scripts": {
-    "build": "npm run db:generate && tsc --skipLibCheck",
-    "start": "npm run db:generate && node dist/server.js",
+    "build": "echo 'No build required'",
+    "start": "node server-simple.js",
     "dev": "nodemon src/server.ts",
     "test": "jest",
     "test:watch": "jest --watch",
