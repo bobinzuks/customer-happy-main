@@ -14,28 +14,39 @@ class CustomerInterviewApp {
 
     async initializeApp() {
         try {
+            console.log('Starting app initialization...');
+            console.log('API_URL:', window.APP_CONFIG?.API_URL);
+            
             // Get business ID from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const businessId = urlParams.get('business') || 'demo-business';
+            console.log('Business ID:', businessId);
             
             // Show loading screen
             this.showLoadingScreen();
+            console.log('Loading screen shown');
             
             // Initialize interview session
+            console.log('Starting interview...');
             await this.startInterview(businessId);
+            console.log('Interview started successfully');
             
             // Setup event listeners
             this.setupEventListeners();
+            console.log('Event listeners setup');
             
             // Initialize voice recognition
             this.initializeVoiceRecognition();
+            console.log('Voice recognition initialized');
             
             // Hide loading screen and show app
             this.hideLoadingScreen();
+            console.log('Loading screen hidden');
             
             console.log('Customer Interview App initialized successfully');
         } catch (error) {
             console.error('Failed to initialize app:', error);
+            this.hideLoadingScreen();
             this.showError('Failed to start interview. Please refresh and try again.');
         }
     }
