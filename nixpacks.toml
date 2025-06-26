@@ -1,11 +1,8 @@
 [phases.setup]
-nixPkgs = ['nodejs-18_x', 'npm-9_x']
-
-[phases.install]
-cmd = 'npm install --only=production'
+nixPkgs = ['nodejs-18_x']
 
 [phases.build]
-cmd = 'npm run build'
+cmd = 'echo "No build required - using Node.js built-ins only"'
 
 [start]
-cmd = 'npm start'
+cmd = 'node server-ultra-simple.js'
