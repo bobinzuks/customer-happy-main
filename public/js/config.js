@@ -1,7 +1,7 @@
 // GSurveyAI Frontend Configuration
 window.APP_CONFIG = {
   // Railway backend URL
-  API_URL: 'https://gsurveyai-production.up.railway.app',
+  API_URL: 'https://web-production-c070a.up.railway.app',
   
   // Environment-based configuration
   // API_URL: window.location.hostname === 'localhost' 
