@@ -15,7 +15,18 @@ class CustomerInterviewApp {
     async initializeApp() {
         try {
             console.log('Starting app initialization...');
+            console.log('APP_CONFIG:', window.APP_CONFIG);
             console.log('API_URL:', window.APP_CONFIG?.API_URL);
+            
+            // Fallback if config isn't loaded
+            if (!window.APP_CONFIG || !window.APP_CONFIG.API_URL) {
+                console.error('APP_CONFIG not loaded, using fallback');
+                window.APP_CONFIG = {
+                    API_URL: 'https://web-production-c070a.up.railway.app',
+                    APP_NAME: 'GSurveyAI',
+                    APP_VERSION: '1.0.0'
+                };
+            }
             
             // Get business ID from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
