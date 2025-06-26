@@ -2,10 +2,10 @@
   "name": "gsurveyai",
   "version": "1.0.0",
   "description": "AI-Powered Customer Survey Platform",
-  "main": "server-ultra-simple.js",
+  "main": "server-bulletproof.js",
   "scripts": {
-    "build": "echo 'Build successful - using ultra simple server'",
-    "start": "node server-ultra-simple.js"
+    "build": "echo 'Build successful - using bulletproof server'",
+    "start": "node server-bulletproof.js"
   },
   "dependencies": {},
   "engines": {

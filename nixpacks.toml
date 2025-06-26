@@ -2,7 +2,7 @@
 nixPkgs = ['nodejs-18_x']
 
 [phases.build]
-cmd = 'echo "No build required - using Node.js built-ins only"'
+cmd = 'echo "Build successful - using bulletproof server"'
 
 [start]
-cmd = 'node server-ultra-simple.js'
+cmd = 'node server-bulletproof.js'
