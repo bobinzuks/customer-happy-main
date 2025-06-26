@@ -508,15 +508,17 @@ class CustomerInterviewApp {
             const inputArea = document.querySelector('.input-area');
             
             if (inputWrapper) {
-                inputWrapper.style.setProperty('background', '#FFFFFF', 'important');
-                inputWrapper.style.setProperty('background-color', '#FFFFFF', 'important');
-                inputWrapper.style.setProperty('border', '2px solid #E5E5EA', 'important');
+                inputWrapper.style.setProperty('background', '#f8f9fa', 'important');
+                inputWrapper.style.setProperty('background-color', '#f8f9fa', 'important');
+                inputWrapper.style.setProperty('border', 'none', 'important');
+                inputWrapper.style.setProperty('border-radius', '24px', 'important');
+                inputWrapper.style.setProperty('box-shadow', '0 1px 3px rgba(0, 0, 0, 0.1)', 'important');
             }
             
             if (messageInput) {
                 messageInput.style.setProperty('background', 'transparent', 'important');
                 messageInput.style.setProperty('background-color', 'transparent', 'important');
-                messageInput.style.setProperty('color', '#000000', 'important');
+                messageInput.style.setProperty('color', '#202124', 'important');
                 messageInput.style.setProperty('font-size', '16px', 'important');
                 messageInput.style.setProperty('-moz-appearance', 'none', 'important');
                 messageInput.style.setProperty('appearance', 'none', 'important');
@@ -530,14 +532,14 @@ class CustomerInterviewApp {
             // Force focus styling
             if (messageInput) {
                 messageInput.addEventListener('focus', () => {
-                    console.log('Input focused - forcing white background');
+                    console.log('Input focused - applying Google focus styling');
                     if (inputWrapper) {
-                        inputWrapper.style.setProperty('background', '#FFFFFF', 'important');
-                        inputWrapper.style.setProperty('background-color', '#FFFFFF', 'important');
-                        inputWrapper.style.setProperty('border-color', '#007AFF', 'important');
+                        inputWrapper.style.setProperty('background', '#ffffff', 'important');
+                        inputWrapper.style.setProperty('background-color', '#ffffff', 'important');
+                        inputWrapper.style.setProperty('box-shadow', '0 2px 8px rgba(0, 0, 0, 0.15)', 'important');
                     }
                     messageInput.style.setProperty('background', 'transparent', 'important');
-                    messageInput.style.setProperty('color', '#000000', 'important');
+                    messageInput.style.setProperty('color', '#202124', 'important');
                 });
             }
         }

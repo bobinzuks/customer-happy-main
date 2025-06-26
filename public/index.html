@@ -77,33 +77,7 @@
             z-index: 10;
         }
         
-        .business-info {
-            text-align: center;
-        }
-        
-        .business-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            margin: 0 auto 10px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        
-        .business-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 4px;
-        }
-        
-        .interview-subtitle {
-            font-size: 14px;
-            color: #8e8e93;
-        }
+        /* Inline styles moved to critical.css */
     </style>
 </head>
 <body>
@@ -120,8 +94,10 @@
         <header class="app-header">
             <div class="business-info">
                 <div id="business-logo" class="business-logo">🏪</div>
-                <h1 id="business-name" class="business-name">Loading...</h1>
-                <p class="interview-subtitle">Customer Experience Interview</p>
+                <div class="business-details">
+                    <h1 id="business-name" class="business-name">Loading...</h1>
+                    <p class="interview-subtitle">Customer Experience Interview</p>
+                </div>
             </div>
         </header>
 
@@ -140,14 +116,14 @@
                     </svg>
                 </button>
                 
-                <div class="input-wrapper" style="background: #FFFFFF !important; background-color: #FFFFFF !important;">
+                <div class="input-wrapper" style="background: #f8f9fa !important; background-color: #f8f9fa !important;">
                     <textarea 
                         id="message-input" 
                         class="message-input" 
                         placeholder="Tell us about your experience..."
                         rows="1"
                         aria-label="Type your response"
-                        style="background: transparent !important; color: #000000 !important; font-size: 16px !important;"
+                        style="background: transparent !important; color: #202124 !important; font-size: 16px !important;"
                     ></textarea>
                     <button id="send-button" class="send-button" aria-label="Send message" type="button">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
