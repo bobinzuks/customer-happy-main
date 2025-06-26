@@ -36,12 +36,13 @@ body {
 /* App Container */
 .app-container {
     display: flex;
-    height: calc(100vh - 40px);
-    height: calc(100dvh - 40px); /* Dynamic viewport height for mobile */
+    height: calc(100vh - 80px); /* More space at bottom */
+    height: calc(100dvh - 80px); /* Dynamic viewport height for mobile */
     flex-direction: column;
     background: white;
     border-radius: 20px 20px 0 0;
     margin-top: 40px;
+    margin-bottom: 40px; /* Add bottom margin */
     position: relative;
     overflow: hidden;
 }
@@ -212,7 +213,8 @@ body {
     flex: 1;
     display: flex;
     align-items: flex-end;
-    background: #FFFFFF;
+    background: #FFFFFF !important; /* Force white background */
+    background-color: #FFFFFF !important; /* Double ensure for Firefox */
     border: 2px solid #E5E5EA;
     border-radius: 22px;
     padding: 8px 8px 8px 16px;
@@ -223,7 +225,8 @@ body {
 .input-wrapper:focus-within {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-    background: #FFFFFF;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
 }
 
 .message-input {
@@ -489,6 +492,29 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* Firefox force light colors for inputs regardless of system theme */
+@-moz-document url-prefix() {
+    .input-wrapper {
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    .message-input {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #000000 !important;
+        -moz-text-fill-color: #000000 !important;
+    }
+    
+    /* Override any dark theme */
+    .input-area {
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
     }
 }
 

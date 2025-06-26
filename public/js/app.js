@@ -55,6 +55,9 @@ class CustomerInterviewApp {
             console.log('Loading screen hidden');
             
             console.log('Customer Interview App initialized successfully');
+        
+        // Force correct styling for Firefox on Linux
+        this.forceFirefoxStyling();
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.hideLoadingScreen();
@@ -493,6 +496,51 @@ class CustomerInterviewApp {
     showError(message) {
         // Simple error display - in production this would be more sophisticated
         alert(message);
+    }
+    
+    forceFirefoxStyling() {
+        // Force correct styling for Firefox on Linux to override GTK themes
+        if (navigator.userAgent.includes('Firefox')) {
+            console.log('Firefox detected - applying styling fixes');
+            
+            const inputWrapper = document.querySelector('.input-wrapper');
+            const messageInput = document.querySelector('.message-input');
+            const inputArea = document.querySelector('.input-area');
+            
+            if (inputWrapper) {
+                inputWrapper.style.setProperty('background', '#FFFFFF', 'important');
+                inputWrapper.style.setProperty('background-color', '#FFFFFF', 'important');
+                inputWrapper.style.setProperty('border', '2px solid #E5E5EA', 'important');
+            }
+            
+            if (messageInput) {
+                messageInput.style.setProperty('background', 'transparent', 'important');
+                messageInput.style.setProperty('background-color', 'transparent', 'important');
+                messageInput.style.setProperty('color', '#000000', 'important');
+                messageInput.style.setProperty('font-size', '16px', 'important');
+                messageInput.style.setProperty('-moz-appearance', 'none', 'important');
+                messageInput.style.setProperty('appearance', 'none', 'important');
+            }
+            
+            if (inputArea) {
+                inputArea.style.setProperty('background', '#FFFFFF', 'important');
+                inputArea.style.setProperty('background-color', '#FFFFFF', 'important');
+            }
+            
+            // Force focus styling
+            if (messageInput) {
+                messageInput.addEventListener('focus', () => {
+                    console.log('Input focused - forcing white background');
+                    if (inputWrapper) {
+                        inputWrapper.style.setProperty('background', '#FFFFFF', 'important');
+                        inputWrapper.style.setProperty('background-color', '#FFFFFF', 'important');
+                        inputWrapper.style.setProperty('border-color', '#007AFF', 'important');
+                    }
+                    messageInput.style.setProperty('background', 'transparent', 'important');
+                    messageInput.style.setProperty('color', '#000000', 'important');
+                });
+            }
+        }
     }
 }
 
