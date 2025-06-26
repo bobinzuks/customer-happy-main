@@ -155,12 +155,26 @@ body {
 .input-area {
     display: flex;
     align-items: flex-end;
-    padding: 16px;
+    padding: 16px 16px 24px 16px; /* Extra bottom padding for Firefox */
     background: white;
     border-top: 1px solid #E5E5EA;
     gap: 12px;
     flex-shrink: 0; /* Prevent input from being compressed */
     min-height: 80px; /* Ensure minimum height */
+    position: relative;
+}
+
+/* Add spacer after input area to ensure full visibility */
+.input-area::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: transparent;
+    pointer-events: none;
 }
 
 .voice-button {
@@ -226,6 +240,29 @@ body {
     color: #1D1D1F;
     -webkit-text-fill-color: #1D1D1F; /* iOS Safari fix */
     -webkit-opacity: 1; /* iOS Safari fix */
+    
+    /* Firefox-specific fixes for Linux/Pop OS */
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 0; /* Critical for Firefox flex containers */
+    box-sizing: border-box;
+}
+
+/* Firefox autofill override - critical for dark theme issues */
+.message-input:-moz-autofill,
+.message-input:-moz-autofill-preview {
+    background-color: transparent !important;
+    color: #1D1D1F !important;
+    filter: none !important;
+}
+
+/* Firefox-specific input fixes for GTK theme interference */
+@-moz-document url-prefix() {
+    .message-input {
+        background-color: transparent !important;
+        color: #1D1D1F !important;
+        -moz-text-fill-color: #1D1D1F !important;
+    }
 }
 
 .message-input::placeholder {
@@ -383,8 +420,43 @@ body {
     }
     
     .input-area {
-        padding: 12px 16px;
+        padding: 12px 16px 20px 16px;
         min-height: 60px;
+    }
+}
+
+/* Firefox-specific height fixes for Linux */
+@-moz-document url-prefix() {
+    .app-container {
+        height: calc(100vh - 60px); /* Extra space for Firefox */
+        margin-bottom: 20px;
+    }
+    
+    .input-area {
+        padding-bottom: 30px; /* More space for Firefox */
+        margin-bottom: 10px;
+    }
+    
+    /* Ensure inputs are fully visible in Firefox flex containers */
+    .input-wrapper {
+        min-height: 44px;
+        overflow: visible; /* Override Firefox's overflow: clip */
+    }
+}
+
+/* Bottom spacer for Firefox input visibility */
+.bottom-spacer {
+    height: 40px;
+    width: 100%;
+    background: transparent;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Firefox gets extra spacing */
+@-moz-document url-prefix() {
+    .bottom-spacer {
+        height: 60px;
     }
 }
 
