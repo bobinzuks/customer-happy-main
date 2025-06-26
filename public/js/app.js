@@ -58,6 +58,9 @@ class CustomerInterviewApp {
         
         // Force correct styling for Firefox on Linux
         this.forceFirefoxStyling();
+        
+        // Force textarea vertical centering for all browsers
+        this.forceTextareaCentering();
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.hideLoadingScreen();
@@ -158,10 +161,14 @@ class CustomerInterviewApp {
             }
         });
 
-        // Auto-resize textarea
+        // Keep textarea at fixed height for single-line input
         messageInput.addEventListener('input', () => {
-            messageInput.style.height = 'auto';
-            messageInput.style.height = Math.min(messageInput.scrollHeight, 80) + 'px';
+            // Keep height fixed at 24px for single-line appearance
+            messageInput.style.height = '24px';
+            // Scroll horizontally if text overflows
+            if (messageInput.scrollWidth > messageInput.clientWidth) {
+                messageInput.scrollLeft = messageInput.scrollWidth;
+            }
         });
 
         // Voice button
@@ -522,6 +529,12 @@ class CustomerInterviewApp {
                 messageInput.style.setProperty('font-size', '16px', 'important');
                 messageInput.style.setProperty('-moz-appearance', 'none', 'important');
                 messageInput.style.setProperty('appearance', 'none', 'important');
+                // CRITICAL: Force vertical centering
+                messageInput.style.setProperty('height', '24px', 'important');
+                messageInput.style.setProperty('line-height', '24px', 'important');
+                messageInput.style.setProperty('padding', '0', 'important');
+                messageInput.style.setProperty('vertical-align', 'middle', 'important');
+                messageInput.style.setProperty('align-self', 'center', 'important');
             }
             
             if (inputArea) {
@@ -542,6 +555,51 @@ class CustomerInterviewApp {
                     messageInput.style.setProperty('color', '#202124', 'important');
                 });
             }
+        }
+    }
+    
+    forceTextareaCentering() {
+        // CRITICAL: Force textarea vertical centering across all browsers
+        console.log('Applying textarea vertical centering fixes');
+        
+        const messageInput = document.querySelector('.message-input');
+        const inputWrapper = document.querySelector('.input-wrapper');
+        
+        if (messageInput && inputWrapper) {
+            // Force container to center alignment
+            inputWrapper.style.setProperty('display', 'flex', 'important');
+            inputWrapper.style.setProperty('align-items', 'center', 'important');
+            inputWrapper.style.setProperty('min-height', '48px', 'important');
+            
+            // Force textarea to be single line and centered
+            messageInput.style.setProperty('height', '24px', 'important');
+            messageInput.style.setProperty('min-height', '24px', 'important');
+            messageInput.style.setProperty('max-height', '24px', 'important');
+            messageInput.style.setProperty('line-height', '24px', 'important');
+            messageInput.style.setProperty('padding', '0', 'important');
+            messageInput.style.setProperty('margin', '0', 'important');
+            messageInput.style.setProperty('vertical-align', 'middle', 'important');
+            messageInput.style.setProperty('align-self', 'center', 'important');
+            messageInput.style.setProperty('white-space', 'nowrap', 'important');
+            messageInput.style.setProperty('overflow', 'hidden', 'important');
+            messageInput.style.setProperty('text-overflow', 'ellipsis', 'important');
+            
+            // Browser-specific fixes
+            const isFirefox = navigator.userAgent.includes('Firefox');
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isFirefox) {
+                messageInput.style.setProperty('-moz-appearance', 'none', 'important');
+                messageInput.style.setProperty('padding-top', '0', 'important');
+                messageInput.style.setProperty('padding-bottom', '0', 'important');
+            }
+            
+            if (isSafari) {
+                messageInput.style.setProperty('-webkit-appearance', 'none', 'important');
+                messageInput.style.setProperty('-webkit-text-size-adjust', '100%', 'important');
+            }
+            
+            console.log('Textarea centering applied successfully');
         }
     }
 }
