@@ -1,5 +1,8 @@
 // Minimal GSurveyAI Server for Railway
-const fastify = require('fastify')({ logger: true });
+const fastify = require('fastify')({ 
+  logger: true,
+  trustProxy: true
+});
 
 // CORS
 fastify.register(require('@fastify/cors'), {
