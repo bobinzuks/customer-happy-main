@@ -198,27 +198,39 @@ body {
     flex: 1;
     display: flex;
     align-items: flex-end;
-    background: var(--secondary-color);
+    background: #FFFFFF;
+    border: 2px solid #E5E5EA;
     border-radius: 22px;
     padding: 8px 8px 8px 16px;
     max-height: 120px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    background: #FFFFFF;
 }
 
 .message-input {
     flex: 1;
     border: none;
     background: transparent;
-    font-size: 16px;
+    font-size: 16px; /* Prevents iOS zoom */
     line-height: 1.4;
     resize: none;
     outline: none;
     min-height: 20px;
     max-height: 80px;
     font-family: inherit;
+    color: #1D1D1F;
+    -webkit-text-fill-color: #1D1D1F; /* iOS Safari fix */
+    -webkit-opacity: 1; /* iOS Safari fix */
 }
 
 .message-input::placeholder {
     color: var(--text-secondary);
+    opacity: 1; /* Override iOS default opacity */
 }
 
 .send-button {

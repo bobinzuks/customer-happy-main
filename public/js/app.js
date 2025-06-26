@@ -250,16 +250,34 @@ class CustomerInterviewApp {
                 throw new Error(`API error: ${response.status}`);
             }
 
-            const data = await response.json();
+            let data;
+            try {
+                data = await response.json();
+            } catch (parseError) {
+                console.error('Failed to parse API response:', parseError);
+                throw new Error('Invalid response format from API');
+            }
             
-            // Add AI response
-            this.addMessage('ai', data.content, {
-                sentimentScore: data.sentimentAnalysis.score,
-                responseTime: data.responseTime
+            // Validate and provide fallbacks for required data
+            const validatedData = {
+                content: data.content || 'I apologize, but I\'m having trouble right now. Could you please try again?',
+                sentimentAnalysis: {
+                    score: (data.sentimentAnalysis && typeof data.sentimentAnalysis.score === 'number') ? data.sentimentAnalysis.score : 0,
+                    confidence: (data.sentimentAnalysis && typeof data.sentimentAnalysis.confidence === 'number') ? data.sentimentAnalysis.confidence : 0.5,
+                    emotions: (data.sentimentAnalysis && Array.isArray(data.sentimentAnalysis.emotions)) ? data.sentimentAnalysis.emotions : []
+                },
+                responseTime: (typeof data.responseTime === 'number') ? data.responseTime : 0,
+                shouldContinue: (typeof data.shouldContinue === 'boolean') ? data.shouldContinue : true
+            };
+            
+            // Add AI response with validated data
+            this.addMessage('ai', validatedData.content, {
+                sentimentScore: validatedData.sentimentAnalysis.score,
+                responseTime: validatedData.responseTime
             });
 
             // Check if interview should end
-            if (!data.shouldContinue) {
+            if (!validatedData.shouldContinue) {
                 setTimeout(() => this.completeInterview(), 2000);
             }
 
