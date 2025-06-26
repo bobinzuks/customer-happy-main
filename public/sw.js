@@ -1,7 +1,7 @@
 // Service Worker for Customer Interview PWA
-const CACHE_NAME = 'customer-interview-v1.0.0';
-const STATIC_CACHE_NAME = 'static-v1.0.0';
-const DYNAMIC_CACHE_NAME = 'dynamic-v1.0.0';
+const CACHE_NAME = 'customer-interview-v1.0.1';
+const STATIC_CACHE_NAME = 'static-v1.0.1';
+const DYNAMIC_CACHE_NAME = 'dynamic-v1.0.1';
 
 // Assets to cache immediately
 const STATIC_ASSETS = [
@@ -63,8 +63,8 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
   
-  // Handle API requests
-  if (url.pathname.startsWith('/api/')) {
+  // Handle API requests - ONLY for same origin
+  if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) {
     event.respondWith(handleApiRequest(request));
     return;
   }
