@@ -27,6 +27,7 @@ body {
     color: var(--text-primary);
     background: var(--background-gradient);
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -36,6 +37,7 @@ body {
 .app-container {
     display: flex;
     height: calc(100vh - 40px);
+    height: calc(100dvh - 40px); /* Dynamic viewport height for mobile */
     flex-direction: column;
     background: white;
     border-radius: 20px 20px 0 0;
@@ -157,6 +159,8 @@ body {
     background: white;
     border-top: 1px solid #E5E5EA;
     gap: 12px;
+    flex-shrink: 0; /* Prevent input from being compressed */
+    min-height: 80px; /* Ensure minimum height */
 }
 
 .voice-button {
@@ -355,6 +359,20 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Mobile viewport fix */
+@media (max-height: 700px) {
+    .app-container {
+        margin-top: 20px;
+        height: calc(100vh - 20px);
+        height: calc(100dvh - 20px);
+    }
+    
+    .input-area {
+        padding: 12px 16px;
+        min-height: 60px;
     }
 }
 
