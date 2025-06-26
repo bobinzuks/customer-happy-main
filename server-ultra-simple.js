@@ -41,6 +41,8 @@ const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
   
+  console.log(`${req.method} ${pathname} - Origin: ${req.headers.origin}`);
+  
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.writeHead(200, corsHeaders);
@@ -49,7 +51,7 @@ const server = http.createServer((req, res) => {
   }
   
   // API Routes
-  if (pathname === '/api/health') {
+  if (pathname === '/api/health' && req.method === 'GET') {
     res.writeHead(200, { ...corsHeaders, 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ status: 'healthy', timestamp: new Date().toISOString() }));
     return;
@@ -114,6 +116,14 @@ const server = http.createServer((req, res) => {
     
     res.writeHead(200, { ...corsHeaders, 'Content-Type': 'application/json' });
     res.end(JSON.stringify(response));
+    return;
+  }
+  
+  // Handle unknown API routes
+  if (pathname.startsWith('/api/')) {
+    console.log(`Unknown API route: ${req.method} ${pathname}`);
+    res.writeHead(404, { ...corsHeaders, 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'API endpoint not found' }));
     return;
   }
   
