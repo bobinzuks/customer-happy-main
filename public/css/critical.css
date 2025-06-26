@@ -35,7 +35,7 @@ body {
 /* App Container */
 .app-container {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 40px);
     flex-direction: column;
     background: white;
     border-radius: 20px 20px 0 0;
